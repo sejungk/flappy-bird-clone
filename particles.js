@@ -25,10 +25,12 @@ class Particle {
 
 function handleParticles() {
   particlesArray.unshift(new Particle);
+
   for (i = 0; i < particlesArray.length; i++) {
     particlesArray[i].update();
     particlesArray[i].draw();
   }
+
   // if more than 200 remove 20
   if (particlesArray.length > 200) {
     for (let i = 0; i < 20; i++) {
