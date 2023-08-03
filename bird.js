@@ -1,11 +1,17 @@
+const octopusSprite = new Image();
+octopusSprite.src = 'octopus.png';
+
 class Bird {
   constructor() {
     this.x = 150;
     this.y = 200;
     this.vy = 0; // determine vertical speed of bird, how fast it falls and moves up
-    this.width = 20;
-    this.height = 20;
+    this.originalWidth = 48;
+    this.originalHeight = 48;
+    this.width = this.originalWidth / 1.5;
+    this.height = this.originalHeight / 1.5;
     this.weight = 1;
+    this.frameX = 0;
   }
 
   // calc pos and speed for each frame
@@ -30,12 +36,15 @@ class Bird {
   }
 
   draw() {
-    ctx.fillStyle = 'red';
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    // ctx.fillStyle = 'red';
+    // ctx.fillRect(this.x, this.y, this.originalWidth, this.height); //hit box
+    ctx.drawImage(octopusSprite, this.frameX * this.originalWidth, 0, this.originalWidth, this.originalHeight, this.x - 5, this.y - 10, this.width * 1.7, this.height * 1.7);
   }
 
   flap() {
     this.vy -= 2;
+    if (this.frameX >= 3)this.frameX = 0;
+    else if (frame % 3.5 === 0) this.frameX++;
   }
 }
 
